@@ -12,7 +12,7 @@ spring:
     datasource:
       names: m1
       m1:
-        type: com.mysql.cj.jdbc.MysqlDataSource
+        type: com.zaxxer.hikari.HikariDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://localhost:3306/data?useUnicode=true&characterEncoding=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE
         url: jdbc:mysql://localhost:3306/data?useUnicode=true&characterEncoding=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE
