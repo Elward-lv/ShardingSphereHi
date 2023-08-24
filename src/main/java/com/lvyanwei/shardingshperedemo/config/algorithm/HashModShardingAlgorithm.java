@@ -14,7 +14,7 @@ public class HashModShardingAlgorithm implements ComplexKeysShardingAlgorithm<St
     @Override
     public Collection<String> doSharding(Collection<String> availableTargetNames, ComplexKeysShardingValue<String> shardingValue) {
         List<String> shardingSuffix = new ArrayList<>();
-        String tableLogicName = "t_order_";
+        String tableLogicName = shardingValue.getLogicTableName() + "_";
 
         Map<String, Collection<String>> columnNameAndShardingValuesMap = shardingValue.getColumnNameAndShardingValuesMap();
         Set<Map.Entry<String, Collection<String>>> entries = columnNameAndShardingValuesMap.entrySet();
