@@ -10,8 +10,8 @@ spring:
     #url: jdbc:mysql://localhost:3306/data?useUnicode=true&characterEncoding=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE
   sharding-sphere:
     datasource:
-      names: m1
-      m1:
+      names: ds1
+      ds1:
         type: com.zaxxer.hikari.HikariDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://localhost:3306/data?useUnicode=true&characterEncoding=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE
@@ -25,11 +25,17 @@ spring:
           key-generator:
             column: order_id
             type: SNOWFLAKE
-          actual-data-nodes: m1.t_order_$->{1..2}
+          actual-data-nodes: ds1.t_order_$->{1..2}
           table-strategy:
-            inline:
-              sharding-column: order_id
-              algorithm-expression: t_order_$->{order_id%2+1}
+            complex:
+              algorithm-class-name: com.lvyanwei.shardingshperedemo.config.algorithm.HashModShardingAlgorithm
+              sharding-columns: order_id
+            #standard:
+            #  preciseAlgorithmClassName: com.lvyanwei.shardingshperedemo.config.algorithm.HashModShardingAlgorithm
+            #  sharding-column: order_id
+            #inline:
+            #  sharding-column: order_id
+            #  algorithm-expression: t_order_$->{order_id%2+1}
     props:
       sql:
         show: true
